@@ -4,6 +4,7 @@
 NLW Expert (React)
 ---
 Essa aplicação foi desenvolvida durante o NLW Experts da Rocketseat utilizando React, TypeScript, Tailwind e a SpeechRecognition API.
+[Website](https://nlw-notes-eight.vercel.app/) 
 
 Executando
 ---
