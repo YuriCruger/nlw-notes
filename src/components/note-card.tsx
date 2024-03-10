@@ -5,19 +5,19 @@ import { XIcon } from "lucide-react";
 
 interface NoteCardProps {
   note: {
-    id: string;
-    date: Date;
+    id: number;
+    created_at: string;
     content: string;
   };
-  onNoteDeleted: (id: string) => void;
+  deleteNote: (noteId: number) => void;
 }
 
-export const NoteCard = ({ note, onNoteDeleted }: NoteCardProps) => {
+export const NoteCard = ({ note, deleteNote }: NoteCardProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger className="flex flex-col rounded-md bg-slate-800 text-left p-5 gap-3 overflow-hidden relative outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400">
         <span className="text-sm font-medium text-slate-300">
-          {formatDistanceToNow(note.date, {
+          {formatDistanceToNow(note.created_at, {
             locale: ptBR,
             addSuffix: true,
           })}
@@ -34,7 +34,7 @@ export const NoteCard = ({ note, onNoteDeleted }: NoteCardProps) => {
           </Dialog.Close>
           <div className="flex flex-1 flex-col gap-3 p-5">
             <span className="text-sm font-medium text-slate-300">
-              {formatDistanceToNow(note.date, {
+              {formatDistanceToNow(note.created_at, {
                 locale: ptBR,
                 addSuffix: true,
               })}
@@ -43,7 +43,7 @@ export const NoteCard = ({ note, onNoteDeleted }: NoteCardProps) => {
           </div>
 
           <button
-            onClick={() => onNoteDeleted(note.id)}
+            onClick={() => deleteNote(note.id)}
             type="button"
             className="w-full bg-slate-800 py-4 text-sm text-slate-300 outline-none font-medium group"
           >
