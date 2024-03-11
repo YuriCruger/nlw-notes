@@ -1,14 +1,15 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 interface NewNoteCardProps {
-  newNote: (content: string) => void;
+  onNoteCreated: (content: string) => void;
 }
 
 let speechRecognition: SpeechRecognition | null = null;
 
-export const NewNoteCard = ({ newNote }: NewNoteCardProps) => {
+export const NewNoteCard = ({ onNoteCreated }: NewNoteCardProps) => {
   const [shouldShowOnboarding, setShouldShowOnboarding] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
   const [content, setContent] = useState("");
@@ -29,16 +30,16 @@ export const NewNoteCard = ({ newNote }: NewNoteCardProps) => {
     }
   };
 
-  const handleSaveNote = async (event: FormEvent) => {
+  const handleSaveNote = (event: FormEvent) => {
     event.preventDefault();
 
     if (content === "") {
       return;
     }
-
-    newNote(content);
+    onNoteCreated(content);
     setContent("");
     setShouldShowOnboarding(true);
+    toast.success("Nota criada com sucesso!");
   };
 
   const handleStartRecording = () => {
